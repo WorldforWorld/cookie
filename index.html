@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Cookie CMP — panel hide/show bar</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- Ранний блокировщик: оставь в head перед любыми внешними скриптами -->
+    <script>
+      (function () {
+        const blockedHosts = [
+          "mc.yandex.ru",
+          "top-fwz1.mail.ru",
+          "top-fwz2.mail.ru",
+          "api-maps.yandex.ru",
+        ];
+        const scripts = document.getElementsByTagName("script");
+        for (let i = scripts.length - 1; i >= 0; i--) {
+          const s = scripts[i];
+          if (!s.src) continue;
+          try {
+            const url = new URL(s.src, location.href);
+            if (blockedHosts.some((h) => url.hostname.includes(h))) {
+              const inert = document.createElement("script");
+              inert.type = "text/plain";
+              if (url.hostname.includes("mc.yandex.ru"))
+                inert.dataset.category = "analytics";
+              else if (url.hostname.includes("mail.ru"))
+                inert.dataset.category = "ads";
+              else if (url.hostname.includes("api-maps.yandex.ru"))
+                inert.dataset.category = "functional";
+              inert.dataset.src = s.src;
+              if (s.textContent) inert.textContent = s.textContent;
+              s.parentNode.replaceChild(inert, s);
+            }
+          } catch (e) {}
+        }
+      })();
+    </script>
+
+    <!-- inert scripts -->
+    <script type="text/plain" data-category="analytics" data-name="ym">
+      (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      m[i].l=1*new Date();
+      k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+      (window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+      ym(141414141414,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true});
+    </script>
+
+    <script type="text/plain" data-category="ads" data-name="mailru">
+      (() => {
+        const _tmr = window._tmr || (window._tmr = []);
+        _tmr.push({ id: "151515", type: "pageView", start: Date.now() });
+        const s = document.createElement("script");
+        s.async = true;
+        s.src = "https://top-fwz1.mail.ru/js/code.js";
+        document.head.appendChild(s);
+      })();
+    </script>
+
+    <script
+      type="text/plain"
+      data-category="functional"
+      data-src="https://api-maps.yandex.ru/2.1/?apikey=1515-1515-1515-1515-1515&lang=ru_RU"
+    ></script>
+
+    <noscript id="mailru-noscript" style="display: none">
+      <div>
+        <img
+          src="https://top-fwz1.mail.ru/counter?id=1515;js=na"
+          style="position: absolute; left: -9999px"
+          alt="Top.Mail.Ru"
+        />
+      </div>
+    </noscript>
+  </head>
+  <body>
+    <!-- UI -->
+    <div
+      class="cookie is-compact"
+      id="cookieCMP"
+      role="dialog"
+      aria-label="Настройки cookies"
+    >
+      <div class="cookie__bar" id="cookieBar">
+        <div class="cookie__bar-text">
+          Мы используем cookies, чтобы вам было удобнее пользоваться сайтом.
+        </div>
+        <div class="cookie__bar-actions">
+          <button class="btn btn--dark" id="acceptAll">Принять все</button>
+          <button class="btn btn--ghost" id="openPanel">
+            Настройки Cookies
+          </button>
+        </div>
+      </div>
+
+      <div class="cookie__panel" id="panel">
+        <div class="cookie__header">
+          <button
+            class="cookie__back"
+            id="collapse"
+            aria-label="Свернуть панель"
+          >
+            ←
+          </button>
+          <div>Управление файлами cookies</div>
+        </div>
+
+        <h2 style="margin: 0 0 6px">Настройки Cookies</h2>
+        <p style="margin: 0 0 14px; color: var(--muted)">
+          Cookies, необходимые для корректной работы сайта, всегда включены.
+          Другие cookies можно настроить индивидуально.
+        </p>
+
+        <div class="group is-open" data-group>
+          <div
+            class="group__head"
+            tabindex="0"
+            role="button"
+            aria-expanded="true"
+          >
+            <div class="group__left">
+              <span class="group__icon" aria-hidden="true">−</span>
+              <span class="group__title">Обязательные cookies</span>
+            </div>
+            <span style="color: var(--accent); font-weight: 400"
+              >Всегда разрешено</span
+            >
+          </div>
+          <div class="group__body">
+            Всегда включены. Эти файлы cookie необходимы для того, чтобы вы
+            могли использовать веб-сайт и его функции. Их нельзя отключить. Они
+            устанавливаются в ответ на ваши запросы, такие как настройка ваших
+            предпочтений конфиденциальности, вход в систему или заполнение форм.
+          </div>
+        </div>
+
+        <div class="group" data-group>
+          <div
+            class="group__head"
+            tabindex="0"
+            role="button"
+            aria-expanded="false"
+          >
+            <div class="group__left">
+              <span class="group__icon" aria-hidden="true">+</span>
+              <span class="group__title">Аналитические cookies</span>
+            </div>
+            <label class="switch" aria-label="Переключатель аналитики">
+              <input type="checkbox" name="analytics" />
+              <span class="track"><span class="thumb"></span></span>
+            </label>
+          </div>
+          <div class="group__body">
+            Могут быть отключены. Эти файлы cookie собирают информацию, чтобы
+            помочь нам понять, как используются наши веб-сайты или насколько
+            эффективны наши маркетинговые кампании, или чтобы помочь нам
+            настроить наши веб-сайты для вас. Список аналитических файлов
+            cookie, которые мы используем: Google Analytics, Яндекс.Метрика,
+            Top.mail.ru, Google Tag Manager.
+          </div>
+        </div>
+
+        <div class="group" data-group>
+          <div
+            class="group__head"
+            tabindex="0"
+            role="button"
+            aria-expanded="false"
+          >
+            <div class="group__left">
+              <span class="group__icon" aria-hidden="true">+</span>
+              <span class="group__title">Рекламные cookies</span>
+            </div>
+            <label class="switch" aria-label="Переключатель рекламы">
+              <input type="checkbox" name="ads" />
+              <span class="track"><span class="thumb"></span></span>
+            </label>
+          </div>
+          <div class="group__body">
+            Эти файлы cookie предоставляют рекламным компаниям информацию о
+            вашей активности в Интернете, чтобы помочь им предоставлять вам
+            более релевантную онлайн-рекламу или ограничивать количество показов
+            рекламы. Эта информация может быть передана другим рекламным
+            компаниям. Список рекламных файлов cookie, которые мы используем:
+            Google Analytics, Яндекс.Метрика, Top.mail.ru.
+          </div>
+        </div>
+
+        <div style="margin-top: 14px">
+          <button class="btn btn--dark" id="saveSettings">Принять</button>
+          <button
+            class="btn"
+            id="revoke"
+            style="margin-left: 8px; display: none"
+          >
+            Отозвать согласие
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cookie Manager + UI logic -->
+    <script src="js/app.js"></script>
+  </body>
+</html>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Cookie CMP — panel hide/show bar</title>
+    <title>Cookie CMP — панель скрытия/отображения</title>
     <link rel="stylesheet" href="css/style.css" />
     <!-- Ранний блокировщик: оставь в head перед любыми внешними скриптами -->
     <script>
@@ -39,40 +39,20 @@
     </script>
 
     <!-- inert scripts -->
-    <script type="text/plain" data-category="analytics" data-name="ym">
-      (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-      m[i].l=1*new Date();
-      k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-      (window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
-      ym(141414141414,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true});
+    <script data-category="analytics" data-name="ym">
+      // Тут код аналитики всякой разной
+      console.log("ym");
     </script>
 
-    <script type="text/plain" data-category="ads" data-name="mailru">
-      (() => {
-        const _tmr = window._tmr || (window._tmr = []);
-        _tmr.push({ id: "151515", type: "pageView", start: Date.now() });
-        const s = document.createElement("script");
-        s.async = true;
-        s.src = "https://top-fwz1.mail.ru/js/code.js";
-        document.head.appendChild(s);
-      })();
+    <script data-category="ads" data-name="mailru">
+      // Тут код аналитики всякой разной
+      console.log("mailru");
     </script>
 
-    <script
-      type="text/plain"
-      data-category="functional"
-      data-src="https://api-maps.yandex.ru/2.1/?apikey=1515-1515-1515-1515-1515&lang=ru_RU"
-    ></script>
-
-    <noscript id="mailru-noscript" style="display: none">
-      <div>
-        <img
-          src="https://top-fwz1.mail.ru/counter?id=1515;js=na"
-          style="position: absolute; left: -9999px"
-          alt="Top.Mail.Ru"
-        />
-      </div>
-    </noscript>
+    <script data-category="functional">
+      // Тут код аналитики всякой разной
+      console.log("functional");
+    </script>
   </head>
   <body>
     <!-- UI -->
